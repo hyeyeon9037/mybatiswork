@@ -16,7 +16,7 @@
    <div class="outer">
       <br>
       <h2 align="center">회원가입</h2>
-      <form action="" method="post" id="enrollForm">
+      <form action="insert.me" method="post" id="enrollForm">
          <table align="center" class="enroll">
             <tr>
                <td>* ID</td>
@@ -66,6 +66,7 @@
       </form>
    </div>
    
+   <!-- 다음 순서 : IdCheckController -->
    <script>
       $(() => {
          const $idInput = $("#id");
@@ -74,6 +75,9 @@
                $.ajax({
                   url: "idCheck.me",
                   data : {id : $idInput.val()},
+                  /* url이 idCheck.me 갈때, data를 들고감 */
+                  
+                  /* 성공했을 경우 (통신간에 문제가 없을 경우)*/
                   success : function(result) {
                      console.log(result);
                      if(result == 'idN') {
@@ -86,6 +90,8 @@
                         $("#enrollForm :submit").attr("disabled", false);
                      }
                   },
+                  
+                  /* 성공했을 못 했을 경우 (통신간에 문제가 있는 경우)*/
                   error : function() {
                      console.log("아이디 중복체크 ajax 통신 실패");
                   }
