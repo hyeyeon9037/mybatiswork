@@ -21,4 +21,10 @@
 	 	  from member
 	 	 where user_id = #{userId}  
 	 </select>
+	 
+	 <insert id="insertMember" parameterType="com.study.mybatis.member.vo.Member">
+	 	insert into member(user_id, user_pwd, user_name, email, birthday, gender, phone, address)
+	 		 		values(#{userId}, #{userPwd}, #{userName}, #{email}, #{birthday}, #{gender}, #{phone},#{address})
+	 				<!-- userId 필드명을 해야해서 #{}쓰는 것 -->		
+	 </insert>
 </mapper>  
