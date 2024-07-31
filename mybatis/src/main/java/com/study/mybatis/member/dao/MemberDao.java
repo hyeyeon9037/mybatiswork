@@ -2,8 +2,17 @@ package com.study.mybatis.member.dao;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.study.mybatis.member.vo.Member;
+
 public class MemberDao {
+	/* 다음 순서 : member-mapper.xml */
+
 	public int checkId(SqlSession sqlSession, String userId) {
 		return sqlSession.selectOne("memberMapper.checkId", userId);
+	}
+
+	public int insertMember(SqlSession sqlSession, Member m) {
+		
+		return sqlSession.insert("memberMapper.insertMember", m);
 	}
 }
