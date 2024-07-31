@@ -16,5 +16,5 @@ public class MemberServicelmpl implements MemberService {
 		sqlSession.close();
 		return checkid;
 	}
-
+	
 }
