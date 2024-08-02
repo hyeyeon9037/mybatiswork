@@ -28,4 +28,12 @@ public class MemberServicelmpl implements MemberService {
       return result;
    }
 
+@Override
+public Member loginMember(Member m) {
+    SqlSession sqlSession = Template.getSqlSession();
+    Member loginUser = mDao.loginMember(sqlSession, m);
+    sqlSession.close();
+	return loginUser;
+}
+
 }

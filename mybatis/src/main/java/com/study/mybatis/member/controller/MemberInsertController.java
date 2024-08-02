@@ -44,7 +44,9 @@ public class MemberInsertController extends HttpServlet {
 		if(result > 0 ) {
 			response.sendRedirect(request.getContextPath());
 		}else {
-			request.getRequestDispatcher("WEB-INF/views/member/memberEnrollForm.jsp");
+			//request.getRequestDispatcher("WEB-INF/views/member/memberEnrollForm.jsp");
+			request.setAttribute("erroMsg", "회원가입 실패"); 
+			request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp").forward(request, response);
 		}
 		
 		
