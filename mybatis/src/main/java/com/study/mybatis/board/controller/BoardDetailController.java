@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import com.study.mybatis.board.service.*;
 import com.study.mybatis.board.vo.Board;
-import com.study.mybatis.member.vo.Reply;
+import com.study.mybatis.board.vo.Reply;
 
 public class BoardDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,19 +21,15 @@ public class BoardDetailController extends HttpServlet {
 		BoardService bService = new BoardServiceImpl();
 		
 		// 1. 조회수 증가
-		
 		int result = bService.increaseCount(boardNo);
 		
 		
 		if(result > 0) {
-			
 			// 2. 상세 조회
-			
 			Board b = bService.selectBoard(boardNo);
 			
-			//3. 해당 글에 달린 댓글 리스트 조회
+			// 3. 해당글에 달린 댓글 리스트 조회
 			ArrayList<Reply> rlist = bService.selectReplyList(boardNo);
-			// selectReplyList는 BoardService에서 선언해줘야한다.
 			
 			request.setAttribute("b", b);
 			request.setAttribute("rlist", rlist);
@@ -41,10 +37,8 @@ public class BoardDetailController extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/views/board/boardDetailView.jsp").forward(request, response);
 		} else {
 			request.setAttribute("errorMsg", "상세조회 실패");
-			request.getRequestDispatcher("WEB-INF/views/common/error.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp").forward(request, response);
 		}
-			
-		
 	}
 
 }

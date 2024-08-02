@@ -7,8 +7,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.study.mybatis.board.vo.Board;
+import com.study.mybatis.board.vo.Reply;
 import com.study.mybatis.common.vo.PageInfo;
-import com.study.mybatis.member.vo.Reply;
 
 public class BoardDao {
 
@@ -35,7 +35,6 @@ public class BoardDao {
 	}
 
 	public int increaseCount(SqlSession sqlSession, int boardNo) {
-		
 		return sqlSession.update("boardMapper.increaseCount", boardNo);
 	}
 
@@ -45,20 +44,17 @@ public class BoardDao {
 
 	public ArrayList<Reply> selectReplyList(SqlSession sqlSession, int boardNo) {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectReplyList", boardNo);
-		}
+	}
 
 	public int selectSearchCount(SqlSession sqlSession, HashMap<String, String> map) {
 		return sqlSession.selectOne("boardMapper.selectSearchCount", map);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public ArrayList<Board> selectSearchList(SqlSession sqlSession, HashMap<String, String> map, PageInfo pi) {
+		int limit = pi.getNumPerPage();
+		int offset = (pi.getNowPage()-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.selectSearchList", map, rowBounds);
+	}
 }

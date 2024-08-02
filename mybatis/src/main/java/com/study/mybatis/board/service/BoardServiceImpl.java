@@ -7,9 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.study.mybatis.board.dao.BoardDao;
 import com.study.mybatis.board.vo.Board;
+import com.study.mybatis.board.vo.Reply;
 import com.study.mybatis.common.template.Template;
 import com.study.mybatis.common.vo.PageInfo;
-import com.study.mybatis.member.vo.Reply;
 
 public class BoardServiceImpl implements BoardService {
 	private BoardDao bDao = new BoardDao();
@@ -35,9 +35,10 @@ public class BoardServiceImpl implements BoardService {
 		SqlSession sqlSession = Template.getSqlSession();
 		int result = bDao.increaseCount(sqlSession, boardNo);
 		
-		if(result > 0 ) {
+		if(result > 0) {
 			sqlSession.commit();
 		}
+		
 		sqlSession.close();
 		return result;
 	}
@@ -59,11 +60,19 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int selectsearchCount(HashMap<String, String> map) {
+	public int selectSearchCount(HashMap<String, String> map) {
 		SqlSession sqlSession = Template.getSqlSession();
 		int searchCount = bDao.selectSearchCount(sqlSession, map);
 		sqlSession.close();
-		return 0;
+		return searchCount;
+	}
+
+	@Override
+	public ArrayList<Board> selectSearchList(HashMap<String, String> map, PageInfo pi) {
+		SqlSession sqlSession = Template.getSqlSession();
+		ArrayList<Board> list = bDao.selectSearchList(sqlSession, map, pi);
+		sqlSession.close();
+		return list;
 	}
 
 }

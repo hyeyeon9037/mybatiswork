@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Board List</title>
 <style>
-	table {
+	.outer table {
 		border:2px solid ;
 		border-collapse : collapse;
 	}
@@ -21,27 +21,27 @@
 		<table border="1">
 			<tr>
 				<td width="100">글번호</td>
-				<td width="500">${b.boardTitle}</td>
+				<td width="500">${ b.boardNo }</td>
 			</tr>
 			<tr>
 				<td>제목</td>
-				<td>${b.boardTitle}</td>
+				<td>${ b.boardTitle }</td>
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td>${b.boardWriter}</td>
+				<td>${ b.boardWriter }</td>
 			</tr>
-			<tr>	
+			<tr>
 				<td>조회수</td>
-				<td>${b.count}</td>
+				<td>${ b.count }</td>
 			</tr>
 			<tr>
 				<td>작성일</td>
-				<td>${b.createDate}</td>
+				<td>${ b.createDate }</td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td height="100">${b.voardContent}</td>
+				<td height="100">${ b.boardContent }</td>
 			</tr>
 		</table>
 		<br>
@@ -52,21 +52,17 @@
 				<th width="100"><button>등록</button></th>
 			</tr>
 			<tr>
-				<th colspan="3" style="text-align:center">댓글( ${ rlist.size() } )</th>
+				<th colspan="3" style="text-align:center">댓글(${rlist.size()})</th>
 			</tr>
-			<c:forEach var = "r" items="${rlist}">
+			
+			<c:forEach var="r" items="${rlist}">
 				<tr>
 					<td>${r.replyWriter}</td>
 					<td>${r.replyContent}</td>
-					<td>${r.createDate}</td>
+					<td>${r.createDate.substring(0,10)}</td>
 				</tr>
 			</c:forEach>
-	
-			<tr>
-				<td>user02</td>
-				<td>ㅋㅋㅋ</td>
-				<td>2022-12-17</td>
-			</tr>
+			
 		</table>
 	</div>
 </body>
