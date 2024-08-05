@@ -1,5 +1,7 @@
 package com.study.mybatis.member.vo;
 
+// 정보를 만들기 위해서 넣은 것이다.
+
 public class Member {
 	 private String userId;
 	 private String userPwd;
