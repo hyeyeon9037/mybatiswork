@@ -42,10 +42,13 @@ public class MemberInsertController extends HttpServlet {
 		int result = new MemberServicelmpl().insertMember(m);
 		
 		if(result > 0 ) {
+			// 성공시 왔던 애들한테 응답값을 돌려보내준다.
 			response.sendRedirect(request.getContextPath());
+			// reponse.sendRedirect
 		}else {
+			// 실패시 
 			//request.getRequestDispatcher("WEB-INF/views/member/memberEnrollForm.jsp");
-			request.setAttribute("erroMsg", "회원가입 실패"); 
+			request.setAttribute("erroMsg", "회원가입 실패"); // request("errorMsg" : 회원가입실패) 랑 같은 의미
 			request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp").forward(request, response);
 		}
 		
