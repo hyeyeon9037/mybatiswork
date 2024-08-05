@@ -8,17 +8,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
 import com.study.mybatis.board.service.*;
 import com.study.mybatis.board.vo.Board;
 import com.study.mybatis.board.vo.Reply;
 
 public class BoardDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	BoardService bService = new BoardServiceImpl();
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
-		
-		BoardService bService = new BoardServiceImpl();
 		
 		// 1. 조회수 증가
 		int result = bService.increaseCount(boardNo);
@@ -41,4 +42,15 @@ public class BoardDetailController extends HttpServlet {
 		}
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int boardNo = Integer.parseInt(request.getParameter("bno"));
+		
+		ArrayList<Reply> rlist = bService.selectReplyList(boardNo);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(rlist);
+		
+		response.setContentType("application/json");
+		response.getWriter().write(json);		
+	}
 }
