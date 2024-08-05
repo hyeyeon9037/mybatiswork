@@ -83,6 +83,7 @@ public class BoardServiceImpl implements BoardService {
 		if ( result >0) {
 			sqlSession.commit();
 		}
+		sqlSession.close();
 		return result;
 	}
 
